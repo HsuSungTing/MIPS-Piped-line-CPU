@@ -6,31 +6,31 @@ module InstructionMemory(Address, Instruction); //我先用他的
 		case (Address)
 		//I: {op	rs	rt	immediate}
 		//R: {op	rs	rt	rd	shamt	funct}
-			32'd0:     Instruction <= {6'd8,5'd0,5'd8, 16'd60};//I type: addi $s0, $zero, 60  |s0=60|
-			32'd4:     Instruction <= {6'd0,5'd8,5'd10,5'd9, 5'd0,6'd32}; //R type: add $s1, $s0, &s2 |s1=260|
-			32'd8:     Instruction <= {6'd0,5'd8, 5'd9,5'd14,5'd0,6'd32};//R type: add $s6, $s1, s0   |s6=320|
-			32'd12:    Instruction <= {6'd8,5'd0,5'd15, 16'd85};//I type: addi $s7, $zero, 85   |s7=85|
-			32'd16:    Instruction <= {6'd0,5'd14,5'd15, 5'd10,5'd0,6'd34};//R type: sub $s2, $s6, $s7  |s2=235|
+			32'd0:     Instruction = {6'd8,5'd0,5'd8, 16'd60};//I type: addi $s0, $zero, 60  |s0=60|
+			32'd4:     Instruction = {6'd0,5'd8,5'd10,5'd9, 5'd0,6'd32}; //R type: add $s1, $s0, &s2 |s1=260|
+			32'd8:     Instruction = {6'd0,5'd8, 5'd9,5'd14,5'd0,6'd32};//R type: add $s6, $s1, s0   |s6=320|
+			32'd12:    Instruction = {6'd8,5'd0,5'd15, 16'd85};//I type: addi $s7, $zero, 85   |s7=85|
+			32'd16:    Instruction = {6'd0,5'd14,5'd15, 5'd10,5'd0,6'd34};//R type: sub $s2, $s6, $s7  |s2=235|
 			//32'd16:    Instruction <= {6'd4,5'd11,5'd12, 16'd0};//I type: beq $s4, $s3, 3  
-			32'd20:    Instruction <= {6'd0,5'd8, 5'd10,5'd14,5'd0,6'd32};//R type: add $s6, $s2,s0  | s6=295
-			32'd24:    Instruction <= {6'd35,5'd8,5'd11,16'd70};//I type: lw $s3,.70(s0)  |s3=5|
-			32'd28:    Instruction <= {6'd43,5'd11,5'd10,16'd50};//I type: sw $s2,.50(s3) |將235寫入addr(5)|
+			32'd20:    Instruction = {6'd0,5'd8, 5'd10,5'd14,5'd0,6'd32};//R type: add $s6, $s2,s0  | s6=295
+			32'd24:    Instruction = {6'd35,5'd8,5'd11,16'd70};//I type: lw $s3,.70(s0)  |s3=5|
+			32'd28:    Instruction = {6'd43,5'd11,5'd10,16'd50};//I type: sw $s2,.50(s3) |將235寫入addr(5)|
 			//會有一個stall
-			32'd32:    Instruction <= {6'd0,5'd9,5'd10,5'd12,5'd0,6'd42};//R type: slt $s4, $s1, $s2    |s4=0|
-			32'd36:    Instruction <= {6'd8,5'd0,5'd11, 16'd60};//I type: beq $s4, s2, 1  |s4=0|
-			32'd40:    Instruction <= {6'd4,5'd0,5'd12, 16'd1}; //I type: beq $s4, $zero, 1  |s4=0|
-			32'd44:    Instruction <= {6'd0,5'd10,5'd11,5'd13,5'd0,6'd36}; //R type: and  $s5, $s2, $s3 |s5=1但這行不會被執行|
-			32'd48:    Instruction <= {6'd0,5'd13,5'd10,5'd8, 5'd0,6'd32}; //R type: add $s0, $s5, $s2  |s0=435|
-			32'd52:    Instruction <= {6'd43,5'd12,5'd8,16'd20}; //I type: sw $s0,.20(s4) |將435寫入addr(20)|
-			32'd56:    Instruction <= {6'd8,5'd0,5'd11, 16'd72};//I type: addi $s2, $s6, 72
-			32'd60:    Instruction <= {6'd35,5'd12,5'd14,16'd20};//I type: lw $s6,.20(s4) |將435寫入addr(20)| s6=435
-			32'd64:    Instruction <= {6'd0,5'd11,5'd14,5'd14,5'd0,6'd37};//R type: or  $s6, $s6, $s3  s6=507 
-			32'd68:    Instruction <= {6'd8,5'd14,5'd8, 16'd72};//I type: addi $s0, $s6, 72  s0=579
-			32'd72:    Instruction <= {6'd43,5'd12,5'd8,16'd20}; //I type: sw $s0,.20(s4) |將435寫入addr(20)|
-			32'd76:    Instruction <= {6'd35,5'd12,5'd13,16'd20};//I type: lw $s5,.20(s4) |將435寫入addr(20)| 寫了馬上讀我不確定讀不讀的到
-			32'd80:    Instruction <= {6'd2,26'd1};//J type: j 5(address=20)
-			32'd84:    Instruction <= {6'd0,5'd11,5'd12,5'd14,5'd0,6'd37};//R type: or  $s6, $s4, $s3
-			default: Instruction <= 32'h00000000;
+			32'd32:    Instruction = {6'd0,5'd9,5'd10,5'd12,5'd0,6'd42};//R type: slt $s4, $s1, $s2    |s4=0|
+			32'd36:    Instruction = {6'd8,5'd0,5'd11, 16'd60};//I type: beq $s4, s2, 1  |s4=0|
+			32'd40:    Instruction = {6'd4,5'd0,5'd12, 16'd1}; //I type: beq $s4, $zero, 1  |s4=0|
+			32'd44:    Instruction = {6'd0,5'd10,5'd11,5'd13,5'd0,6'd36}; //R type: and  $s5, $s2, $s3 |s5=1但這行不會被執行|
+			32'd48:    Instruction = {6'd0,5'd13,5'd10,5'd8, 5'd0,6'd32}; //R type: add $s0, $s5, $s2  |s0=435|
+			32'd52:    Instruction = {6'd43,5'd12,5'd8,16'd20}; //I type: sw $s0,.20(s4) |將435寫入addr(20)|
+			32'd56:    Instruction = {6'd8,5'd0,5'd11, 16'd72};//I type: addi $s2, $s6, 72
+			32'd60:    Instruction = {6'd35,5'd12,5'd14,16'd20};//I type: lw $s6,.20(s4) |將435寫入addr(20)| s6=435
+			32'd64:    Instruction = {6'd0,5'd11,5'd14,5'd14,5'd0,6'd37};//R type: or  $s6, $s6, $s3  s6=507 
+			32'd68:    Instruction = {6'd8,5'd14,5'd8, 16'd72};//I type: addi $s0, $s6, 72  s0=579
+			32'd72:    Instruction = {6'd43,5'd12,5'd8,16'd20}; //I type: sw $s0,.20(s4) |將435寫入addr(20)|
+			32'd76:    Instruction = {6'd35,5'd12,5'd13,16'd20};//I type: lw $s5,.20(s4) |將435寫入addr(20)| 寫了馬上讀我不確定讀不讀的到
+			32'd80:    Instruction = {6'd2,26'd1};//J type: j 5(address=20)
+			32'd84:    Instruction = {6'd0,5'd11,5'd12,5'd14,5'd0,6'd37};//R type: or  $s6, $s4, $s3
+			default: Instruction = 32'h00000000;
 		endcase
 endmodule
 
@@ -332,9 +332,14 @@ Ins_31_26_out,Ins_31_26_in);
 	end
 endmodule
 
-module CPU(Reset, clk, RF_data0,RF_data1,RF_data2,RF_data3,RF_data4,RF_data5,RF_data6,RF_data7,RF_data8,RF_data9,RF_data10,RF_data11,RF_data12,RF_data13,RF_data14,RF_data15,
+module CPU(Reset, clk,instruction_output_stage_1,ALU_result_output_stage_3,Write_data_output_stage_4,Write_data_output_stage_5, RF_data0,RF_data1,RF_data2,RF_data3,RF_data4,RF_data5,RF_data6,RF_data7,RF_data8,RF_data9,RF_data10,RF_data11,RF_data12,RF_data13,RF_data14,RF_data15,
 RF_data16,RF_data17,RF_data18,RF_data19,RF_data20,RF_data21,RF_data22,RF_data23,RF_data24,RF_data25,RF_data26,RF_data27,RF_data28,RF_data29,RF_data30,RF_data31);
 	input Reset, clk;
+    output wire[31:0]instruction_output_stage_1;
+    output wire[31:0]ALU_result_output_stage_3;
+    output wire[31:0]Write_data_output_stage_4;
+    output wire[31:0]Write_data_output_stage_5;
+
 	reg [31:0]pc;
 	reg [4:0]Read_register1_ver1,Read_register2_ver1;
 	reg [4:0] Write_register_1;
@@ -354,6 +359,8 @@ RF_data16,RF_data17,RF_data18,RF_data19,RF_data20,RF_data21,RF_data22,RF_data23,
 		else pc<=next_pc;
 	end
 	assign Ins_31_26_stage2=cur_Insctructions_ver2[31:26];
+    assign instruction_output_stage_1=cur_Insctructions_ver1;
+
 	InstructionMemory U1(.Address(pc),.Instruction(cur_Insctructions_ver0));
 	//--------IF_ID input Instruction, output: Instruction--------
 	
@@ -362,6 +369,7 @@ RF_data16,RF_data17,RF_data18,RF_data19,RF_data20,RF_data21,RF_data22,RF_data23,
 		else if(cur_Insctructions_ver2[31:26]==6'd35&&cur_Insctructions_ver2[20:16]==cur_Insctructions_ver1[20:16])load_use_harzard=1'b1;
 		else load_use_harzard=1'b0;
 	end
+    
 	IF_ID_Reg U5(.clk(clk),.Instruction_in(cur_Insctructions_ver1),.Instruction_out(cur_Insctructions_ver2),.load_use_bool(load_use_harzard));
 	//----------------------------------------------------------------------------
 	
@@ -476,21 +484,41 @@ RF_data16,RF_data17,RF_data18,RF_data19,RF_data20,RF_data21,RF_data22,RF_data23,
 	//Forward Logic
 	//我這邊好聰明，直接用Write_register3和4代替掉有rd or rt(I type和R type要寫回的register不同)
 	always@(*)begin
-		if(Write_register_3==Read_register1_ver2&&Ins_31_26_stage4!=6'd2&&Ins_31_26_stage4!=6'd4&&Ins_31_26_stage4!=6'd43)begin Read_data1_2_after_forward=ALU_result_out; forward_bool_1=2'd1;end
-		else if(Write_register_4==Read_register1_ver2&&Ins_31_26_stage5!=6'd2&&Ins_31_26_stage5!=6'd4&&Ins_31_26_stage5!=6'd43)begin Read_data1_2_after_forward=Write_data_3; forward_bool_1=2'd2;end
-		else begin Read_data1_2_after_forward=Read_data1_2; forward_bool_1=2'd0;end
+		if(Write_register_3==Read_register1_ver2&&Ins_31_26_stage4!=6'd2&&Ins_31_26_stage4!=6'd4&&Ins_31_26_stage4!=6'd43)begin 
+            Read_data1_2_after_forward=ALU_result_out; 
+            forward_bool_1=2'd1;
+        end
+		else if(Write_register_4==Read_register1_ver2&&Ins_31_26_stage5!=6'd2&&Ins_31_26_stage5!=6'd4&&Ins_31_26_stage5!=6'd43)begin 
+            Read_data1_2_after_forward=Write_data_3; 
+            forward_bool_1=2'd2;
+        end
+		else begin 
+            Read_data1_2_after_forward=Read_data1_2; 
+            forward_bool_1=2'd0;
+        end
 	end
 
 	always@(*)begin
-		if(Write_register_3==Read_register2_ver2&&Ins_31_26_stage4!=6'd2&&Ins_31_26_stage4!=6'd4&&Ins_31_26_stage4!=6'd43)begin Read_data2_2_after_forward=ALU_result_out; forward_bool_2=2'd1;end
-		else if(Write_register_4==Read_register2_ver2&&Ins_31_26_stage5!=6'd2&&Ins_31_26_stage5!=6'd4&&Ins_31_26_stage5!=6'd43)begin Read_data1_2_after_forward=Write_data_3; forward_bool_2=2'd2;end
-		else begin Read_data2_2_after_forward=Read_data2_2; forward_bool_2=2'd0;end
+		if(Write_register_3==Read_register2_ver2&&Ins_31_26_stage4!=6'd2&&Ins_31_26_stage4!=6'd4&&Ins_31_26_stage4!=6'd43)begin 
+            Read_data2_2_after_forward=ALU_result_out; 
+            forward_bool_2=2'd1;
+        end
+		else if(Write_register_4==Read_register2_ver2&&Ins_31_26_stage5!=6'd2&&Ins_31_26_stage5!=6'd4&&Ins_31_26_stage5!=6'd43)begin 
+            Read_data2_2_after_forward=Write_data_3; 
+            forward_bool_2=2'd2;
+        end
+		else begin 
+            Read_data2_2_after_forward=Read_data2_2; 
+            forward_bool_2=2'd0;
+        end
 	end
 	
 	ALU_and_Control U3(.data_1(Read_data1_2_after_forward),.data_2(Read_data2_2_after_forward),.Ins_31_26(Ins_31_26_stage3),.Ins_5_0(Ins_5_0),.Ins_15_0(Ins_15_0),.ALU_result(ALU_result));
 	//這一段會加入forward unit(為了解決EXE or MEM data Harzard)
 	//EXE_MEM input&output Control的所有輸出(包含Data_RAM所需、write_back所需)，以及D_RAM要用的address和write_data
-	EXE_MEM U9(.Reset(Reset),.clk(clk),.Address_in(ALU_result),.Write_data_RAM_in(Read_data2_2_after_forward),.MemWrite_in(MemWrite_2),.RegWrite_in(RegWrite_2),.Write_register_in(Write_register_2),.MemtoReg_in(MemtoReg_2),
+	assign ALU_result_output_stage_3=ALU_result;
+
+    EXE_MEM U9(.Reset(Reset),.clk(clk),.Address_in(ALU_result),.Write_data_RAM_in(Read_data2_2_after_forward),.MemWrite_in(MemWrite_2),.RegWrite_in(RegWrite_2),.Write_register_in(Write_register_2),.MemtoReg_in(MemtoReg_2),
 	.Address_out(ALU_result_out),.Write_data_RAM_out(Read_data2_3),.MemWrite_out(MemWrite_3),.RegWrite_out(RegWrite_3),.Write_register_out(Write_register_3),.MemtoReg_out(MemtoReg_3),.Ins_31_26_in(Ins_31_26_stage3),.Ins_31_26_out(Ins_31_26_stage4));
 
 //stage 4 write back logic(要把RegWrite_3,Write_register_3,Write_data_2傳回stage 2的RF中)
@@ -502,6 +530,7 @@ RF_data16,RF_data17,RF_data18,RF_data19,RF_data20,RF_data21,RF_data22,RF_data23,
 		if(MemtoReg_3==1'b1)Write_data_2=Read_data_from_ram;
 		else Write_data_2=ALU_result_out;   //直接寫進register
 	end
-	
+	assign Write_data_output_stage_4=Write_data_2;
 	MEM_WB U8(.Reset(Reset),.clk(clk),.RegWrite_2(RegWrite_3),.RegWrite_3(RegWrite_4),.Write_data_in(Write_data_2),.Write_data_out(Write_data_3),.Write_register_in(Write_register_3),.Write_register_out(Write_register_4),.Ins_31_26_in(Ins_31_26_stage4),.Ins_31_26_out(Ins_31_26_stage5));
+    assign Write_data_output_stage_5=Write_data_3;
 endmodule
